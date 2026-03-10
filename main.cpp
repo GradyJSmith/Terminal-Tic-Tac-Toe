@@ -1,7 +1,8 @@
+// INCLUDES
 #include<iostream>
 
+// GLOBAL VARIABLES
 int squares;
-
 
 bool player1Turn = true; 
 
@@ -19,6 +20,7 @@ char square7 = ' ';
 char square8 = ' ';
 char square9 = ' ';
 
+//LOOP RUNS IF SOMEONE WINS
 void winloop(char winner){
     if(winner == 'X'){
         std::cout << "THE Xs WON!";
@@ -28,11 +30,13 @@ void winloop(char winner){
     exit(0);
 }
 
+//LOOP RUNS IF THE GAME ENDS IN A TIE (ALL SQUARES FULL WITH NO WIN)
 void tieLoop(){
     std::cout << "IT ENDED IN A TIE...";
     exit(0);
 }
 
+//LOOP TO CHECK IF SOMEONE WON
 void checkWin(){
     // Row 1
     if(square1 == square2 && square2 == square3 && square1 != ' '){
@@ -68,6 +72,7 @@ void checkWin(){
     }
 }
 
+//YOUR WORST NIGHTMARE
 void AI(){
 
     // --- WINNING LOGIC: make 0 win ---
@@ -213,6 +218,8 @@ void AI(){
     if(square8 == ' ') { square8 = 'O'; return; }
     if(square9 == ' ') { square9 = 'O'; return; }
 }
+
+//DRAWS THE BOARD EACH TURN
 void drawBoard(){
     std::cout << " " << square1 << "  |  " << square2 << "  |  " << square3 << "\n";
     std::cout << "--------------\n";
@@ -221,6 +228,7 @@ void drawBoard(){
     std::cout << " " << square7 << "  |  " << square8 << "  |  " << square9 << "\n";
 }
 
+//SHOWS THE BOARD SQUARE INDEX
 void showboardnum(){
     std::cout << "    |    |    \n";
     std::cout << "  1 |  2 |  3 \n";
@@ -232,6 +240,7 @@ void showboardnum(){
     std::cout << " 7  |  8 |  9 \n";
 }
 
+//RUNS EACH TURN ASKING USER TO PICK THEIR SQUARE
 void squareFill(){
     int squarenum;
     for( ; squares < 9 ; squares++){
@@ -293,6 +302,7 @@ void squareFill(){
     }
 }
 
+//MAIN LOOP
 int main(){
     squares = 0;
     drawBoard();
