@@ -23,6 +23,7 @@ char square8 = ' ';
 char square9 = ' ';
 
 bool easyMode = false;
+
 //LOOP RUNS IF SOMEONE WINS
 void winloop(char winner){
     if(winner == 'X'){

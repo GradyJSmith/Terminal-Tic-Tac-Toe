@@ -190,6 +190,12 @@ void AI(){
     if(square9 == 'X' && square6 == 'X' && square5 == 'O' && square3 == ' ') { square3 = 'O'; return; }
     if(square9 == 'X' && square8 == 'X' && square5 == 'O' && square7 == ' ') { square7 = 'O'; return; }
 
+    // Case 3: X plays two edges that create a corner fork
+    if(square2 == 'X' && square6 == 'X' && square3 == ' ') { square3 = 'O'; return; }
+    if(square2 == 'X' && square4 == 'X' && square1 == ' ') { square1 = 'O'; return; }
+    if(square8 == 'X' && square6 == 'X' && square9 == ' ') { square9 = 'O'; return; }
+    if(square8 == 'X' && square4 == 'X' && square7 == ' ') { square7 = 'O'; return; }
+
     // --- Opening Strategy ---
     // 1. Take center
     if(square5 == ' ') { square5 = 'O'; return; }
