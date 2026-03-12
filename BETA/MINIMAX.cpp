@@ -65,8 +65,8 @@ int minimax(bool isMax, int depth) {
     if(w == 'X') return -10 + depth;
 
     bool empty = false;
-    for(int i=0;i<9;i++) if(*board[i]==' ') empty = true;
- 0;
+for(int i=0;i<9;i++) if(*board[i]==' ') empty = true;
+if(!empty) return 0;
 
     if(isMax) {
         int best = -1000;
