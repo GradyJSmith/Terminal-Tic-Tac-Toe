@@ -140,47 +140,41 @@ void AI() {
     move = findWinningMove('X');
     if(move != -1){ *board[move]='O'; return; }
 
-    // 3. Create fork
-    move = findFork('O');
-    if(move != -1){ *board[move]='O'; return; }
-
-    // 4. Block opponent fork
-    move = findFork('X');
-    if(move != -1){ *board[move]='O'; return; }
-
-    // 5. Take center
-    if(square5==' '){ square5='O'; return; }
-
-    // 6. Take a corner
-    int corners[4] = {0,2,6,8};
-    std::vector<int> openCorners;
-    for(int c : corners) if(*board[c]==' ') openCorners.push_back(c);
-    if(!openCorners.empty()){
-        *board[openCorners[rand()%openCorners.size()]]='O';
-        return;
-    }
-
-    // 7. Minimax fallback
+    // 3. PURE MINIMAX WITH EVIL TIEBREAKER
     int bestScore = -1000;
-    std::vector<int> bestMoves;
+    int bestEvil = 1000; // opponent's best reply
+    int bestMove = -1;
 
     for(int i=0;i<9;i++){
         if(*board[i]==' '){
             *board[i]='O';
             int score = minimax(false,0);
+
+            // EVIL MODE: evaluate opponent's best reply
+            int opponentBest = 1000;
+            for(int j=0;j<9;j++){
+                if(*board[j]==' '){
+                    *board[j]='X';
+                    opponentBest = std::min(opponentBest, minimax(true,1));
+                    *board[j]=' ';
+                }
+            }
+
             *board[i]=' ';
-            if(score > bestScore){
+
+            // Choose move with highest score
+            // If tied, choose move with WORST opponent reply
+            if(score > bestScore || (score == bestScore && opponentBest < bestEvil)){
                 bestScore = score;
-                bestMoves.clear();
-                bestMoves.push_back(i);
-            } else if(score == bestScore){
-                bestMoves.push_back(i);
+                bestEvil = opponentBest;
+                bestMove = i;
             }
         }
     }
 
-    *board[bestMoves[rand()%bestMoves.size()]] = 'O';
+    *board[bestMove] = 'O';
 }
+
 
 // DRAW BOARD
 void drawBoard(){
