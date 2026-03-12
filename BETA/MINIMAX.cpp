@@ -74,7 +74,7 @@ void checkWin(){
 }
 
 // MINIMAX HELPER
-int minimax(bool isMaximizing) {
+int minimax(bool isMaximizing, int depth) {
     char* squares_arr[9] = {
         &square1,&square2,&square3,
         &square4,&square5,&square6,
@@ -94,8 +94,8 @@ int minimax(bool isMaximizing) {
     };
 
     char w = winner();
-    if(w == 'O') return 10;
-    if(w == 'X') return -10;
+    if(w == 'O') return 10 - depth;   // prefer faster wins
+    if(w == 'X') return -10 + depth;  // prefer slower losses
 
     bool anyEmpty = false;
     for(int i = 0; i < 9; i++) if(*squares_arr[i] == ' ') { anyEmpty = true; break; }
