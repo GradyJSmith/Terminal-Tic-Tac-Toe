@@ -44,8 +44,8 @@ This approach creates a strong opponent without using recursion or minimax algor
 
 ## Requirements
 
-- C++ compiler (C++11 or later recommended)
-- Terminal or command prompt
+- Obviously a Terminal or command prompt
+- If you want to do it the hard way you need a C++ compiler (C++11 or later recommended)
 
 ---
 
